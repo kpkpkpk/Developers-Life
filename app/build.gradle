@@ -9,7 +9,9 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdk 31
-
+    dataBinding{
+        enabled= true
+    }
     defaultConfig {
         applicationId "com.example.devapp"
         minSdk 24
