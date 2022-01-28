@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pewpee.core.adapter.BaseViewHolder
 
 abstract class BaseRecyclerAdapter<T, VH : BaseViewHolder<T>>(list: List<T>) :
-    ListAdapter<T,VH>() {
+    RecyclerView.Adapter<VH>() {
     private var _recyclerView: RecyclerView? = null
 
     var items: MutableList<T> = list.toMutableList()
