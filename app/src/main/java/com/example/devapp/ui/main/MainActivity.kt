@@ -3,6 +3,7 @@ package com.example.devapp.ui.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.devapp.R
@@ -17,28 +18,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         navHostFragment.navController
     }
 
-    private val navHostFragment:NavHostFragment by lazy{
+    private val navHostFragment: NavHostFragment by lazy {
         supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
     }
-    private val homeFragment by lazy{
-        HomeFragment()
-    }
-    private val savedFragment by lazy{
-        SavedFragment()
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         val splashScreen = installSplashScreen()
+        super.onCreate(savedInstanceState)
 
     }
-    private fun navigationOnFragments(){
-        binding.bottomNavigation.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.main_fragment -> supportFragmentManager.beginTransaction().replace()
-            }
-        }
+
+    private fun navigationOnFragments() {
+
     }
 
     override fun ActivityMainBinding.initialize() {
+
     }
 }
