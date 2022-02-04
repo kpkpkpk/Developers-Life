@@ -11,6 +11,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="5dp"
         app:cardCornerRadius="5dp"
         android:layout_margin="5dp">
 
@@ -18,15 +19,26 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
-
-            <com.google.android.material.textview.MaterialTextView
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                android:textSize="14sp"
-                android:id="@+id/author"
-                android:layout_marginStart="10dp"
-                tools:text="theBestMeme"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:textSize="14sp"
+                    android:id="@+id/author"
+                    android:layout_marginStart="10dp"
+                    tools:text="theBestMeme"
+                    android:layout_height="wrap_content" />
+               <com.google.android.material.textview.MaterialTextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="end"
+                   tools:text="10, Jan 9:60:60"
+                   android:id="@+id/date"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
@@ -41,33 +53,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:id="@+id/gif"
+                android:clickable="true"
+                android:focusable="true"
                 android:scaleType="centerCrop"
                 android:layout_marginTop="16dp"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="5dp"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:layout_width="wrap_content"
-                    android:id="@+id/favorite_btn"
-                    android:backgroundTint="@android:color/transparent"
-                    tools:src="@drawable/ic_unfilled_heart"
-                    android:layout_height="wrap_content" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    tools:text="999"
-                    android:id="@+id/post_rating"
-                    android:layout_marginStart="5dp"
-                    android:layout_gravity="center"
-                    android:textSize="14sp"
-                    android:layout_height="wrap_content" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="40dp"
+                android:id="@+id/favorite_btn"
+                tools:src="@drawable/ic_filled_heart"
+                android:layout_height="40dp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 

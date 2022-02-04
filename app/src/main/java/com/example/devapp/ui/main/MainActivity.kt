@@ -6,6 +6,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.devapp.R
 import com.example.devapp.core.base.activity.BaseActivity
 import com.example.devapp.databinding.ActivityMainBinding
@@ -16,6 +17,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val navigationController: NavController by lazy {
         navHostFragment.navController
+
     }
 
     private val navHostFragment: NavHostFragment by lazy {
@@ -28,11 +30,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     }
 
-    private fun navigationOnFragments() {
-
-    }
-
     override fun ActivityMainBinding.initialize() {
-
+        navigationController.graph =
+            navigationController.navInflater.inflate(R.navigation.nav_graph)
+        binding.bottomNavigation.setupWithNavController(navigationController)
     }
 }

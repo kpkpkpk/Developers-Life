@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.devapp.data.model.GifModel
 import com.example.devapp.databinding.MemItemBinding
 
@@ -29,8 +31,31 @@ class GifAdapter() : ListAdapter<GifModel, GifAdapter.ViewHolder>(DiffCallback()
 
         private val context = binding.root.context
         //GifsViewModel
-        fun bind(cont) {
 
+        fun bind(gifModel: GifModel) {
+            binding.author.text = gifModel.author
+            binding.postTitle.text = gifModel.description
+            binding.date.text = gifModel.date
+            loadPreview(gifModel.previewURL)
+            binding.gif.setOnClickListener {
+                loadGif(gifModel.gifURL)
+            }
+        }
+
+        private fun loadPreview(url: String?) {
+            Glide
+                .with(context)
+                .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(binding.gif)
+        }
+
+        private fun loadGif(url:String?) {
+            Glide.with(context)
+                .asGif()
+                .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(binding.gif)
         }
 
     }
@@ -48,7 +73,7 @@ class GifAdapter() : ListAdapter<GifModel, GifAdapter.ViewHolder>(DiffCallback()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-         holder.bind()
+        holder.bind(getItem(position))
     }
 
     override fun getItemId(position: Int): Long {

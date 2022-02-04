@@ -18,5 +18,6 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>(R.layout.fragment_saved
     }
 
     override fun FragmentSavedBinding.initialize() {
+
     }
 }
