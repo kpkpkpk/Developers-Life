@@ -12,12 +12,5 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getListOfMemesUseCase: GetListOfMemesUseCase,
 ) {
-    val s = flow<Int> {
-        var a = 0
-        emit(a)
-        for (i in 0..10) {
-            a++
-            emit(a)
-        }
-    }
+    private val _state = mutable()
 }
