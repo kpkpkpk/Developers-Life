@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.devapp.ui.components.fragments.HomeFragment"
+        android:name="com.example.devapp.ui.components.fragments.home_fragment.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/savedFragment"

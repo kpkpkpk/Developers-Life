@@ -1,6 +1,6 @@
-package com.example.devapp.data.model
+package com.example.devapp.domain.model
 
-import com.example.devapp.data.model.response.GifResponse
+import com.example.devapp.domain.model.response.GifResponse
 import com.google.gson.annotations.SerializedName
 
 data class GifsResponse(

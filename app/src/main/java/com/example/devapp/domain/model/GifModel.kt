@@ -1,4 +1,4 @@
-package com.example.devapp.data.model
+package com.example.devapp.domain.model
 
 class GifModel(
     val id: Int,
