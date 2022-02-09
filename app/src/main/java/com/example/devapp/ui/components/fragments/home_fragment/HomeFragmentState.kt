@@ -5,6 +5,6 @@ import com.example.devapp.domain.model.GifsResponse
 
 data class HomeFragmentState(
     val isLoading: Boolean = false,
-    val memesList:List<GifModel>,
+    val memesList:List<GifModel> = emptyList(),
     val error: String = ""
 )
