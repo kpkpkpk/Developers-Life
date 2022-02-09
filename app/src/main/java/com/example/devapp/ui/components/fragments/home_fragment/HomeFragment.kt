@@ -34,6 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                         }
                         it.memesList.isNotEmpty() -> {
                             rvAdapter.submitList(it.memesList)
+                            binding.memesRecyclerView.adapter = rvAdapter
                         }
                         else -> {
                             //
@@ -43,6 +44,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         }
         homeViewModel.getListOfMemes("latest",0)
-        binding.memesRecyclerView.adapter = rvAdapter
     }
 }

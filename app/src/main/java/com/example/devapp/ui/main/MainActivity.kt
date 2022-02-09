@@ -8,7 +8,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.devapp.R
 import com.example.devapp.core.base.activity.BaseActivity
 import com.example.devapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val navigationController: NavController by lazy {
