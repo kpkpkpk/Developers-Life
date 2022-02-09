@@ -12,13 +12,13 @@ import javax.inject.Inject
 class GetListOfMemesUseCase @Inject constructor(
     private val gifRepository: GifRepository
 ) {
-    operator fun invoke(type:String, page:Int): Flow<Resource<GifsResponse>> = flow{
+    operator fun invoke(type:String,page:Int,pageSize:Int): Flow<Resource<GifsResponse>> = flow{
        try {
            emit(Resource.Loading<GifsResponse>())
-           emit(Resource.Success<GifsResponse>(data = gifRepository.getListOfMemes(type,page)))
+           emit(Resource.Success<GifsResponse>(data =gifRepository.getListOfMemes(type,page,pageSize)))
 
        } catch(e: HttpException) {
-           emit(Resource.Error<GifsResponse>(e.localizedMessage ?: "An unexpected error occured"))
+           emit(Resource.Error<GifsResponse>(e.localizedMessage ?: "An unexpected error occurred"))
        } catch(e: IOException) {
            emit(Resource.Error<GifsResponse>("Couldn't reach server. Check your internet connection."))
        }

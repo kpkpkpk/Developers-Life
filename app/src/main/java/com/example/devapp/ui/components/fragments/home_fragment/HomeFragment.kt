@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.runtime.collectAsState
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,7 @@ import com.example.devapp.databinding.FragmentHomeBinding
 import com.example.devapp.ui.components.adapters.GifAdapter
 import com.example.devapp.ui.components.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -23,11 +24,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val homeViewModel: HomeViewModel by viewModels()
     override fun FragmentHomeBinding.initialize() {
         binding.memesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        binding.btn.setOnClickListener {
+            homeViewModel.nextPage("latest")
+        }
 //        rvAdapter.submitList(
 //        )
-        viewLifecycleOwner.lifecycleScope.launch{
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.state.collect{
+//        homeViewModel.state
+//            .flowWithLifecycle(lifecycle, Lifecycle.State.CREATED)
+//            .onEach {
+//
+//            }.launchIn(lifecycleScope)
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+//            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                homeViewModel.state.collectLatest {
                     when {
                         it.error.isNotBlank() -> {
                             Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
@@ -41,8 +51,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                         }
                     }
                 }
-            }
+//            }
         }
-        homeViewModel.getListOfMemes("latest",0)
+        homeViewModel.getListOfMemes("latest", homeViewModel.page, pageSize = 10)
     }
 }
+

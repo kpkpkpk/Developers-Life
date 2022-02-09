@@ -13,7 +13,7 @@ import javax.inject.Inject
 class GifRepositoryImpl @Inject constructor(
     private val api: API,
 ) : GifRepository {
-    override suspend fun getListOfMemes(type: String, page: Int): GifsResponse {
-       return api.getListOfMemes(type,page)
+    override suspend fun getListOfMemes(type: String, page: Int, pageSize:Int): GifsResponse {
+       return api.getListOfMemes(type,page,pageSize)
     }
 }

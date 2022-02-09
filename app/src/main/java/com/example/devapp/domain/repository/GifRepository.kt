@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface GifRepository {
-    suspend fun getListOfMemes(type: String, page: Int): GifsResponse
+    suspend fun getListOfMemes(type: String,page:Int, pageSize: Int): GifsResponse
 }
