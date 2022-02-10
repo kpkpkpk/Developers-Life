@@ -37,21 +37,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 //            }.launchIn(lifecycleScope)
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 //            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.state.collectLatest {
-                    when {
-                        it.error.isNotBlank() -> {
-                            Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
-                        }
-                        it.memesList.isNotEmpty() -> {
-                            rvAdapter.submitList(it.memesList)
-                            binding.memesRecyclerView.adapter = rvAdapter
-                        }
-                        else -> {
-                            //
-                        }
+            homeViewModel.state.collectLatest {
+                when {
+                    it.error.isNotBlank() -> {
+                        Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                    }
+                    it.memesList.isNotEmpty() -> {
+                        rvAdapter.submitList(it.memesList)
+                        binding.memesRecyclerView.adapter = rvAdapter
+                    }
+                    else -> {
+                        //
                     }
                 }
-//            }
+            }
         }
         homeViewModel.getListOfMemes("latest", homeViewModel.page, pageSize = 10)
     }

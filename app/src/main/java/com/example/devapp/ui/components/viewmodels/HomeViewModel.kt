@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(
 
     fun nextPage(type: String) {
         _page++
-        getListOfMemes(type, _page,pageSize=10)
+        getListOfMemes(type, _page, pageSize = 10)
 
     }
 

@@ -11,41 +11,46 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="5dp"
-        app:cardCornerRadius="5dp"
-        android:layout_margin="5dp">
+        android:elevation="@dimen/card_elevation"
+        app:cardCornerRadius="@dimen/item_corner_radius"
+        android:layout_margin="@dimen/cards_margin">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/author_date_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/author_text_margin_start_end">
+
                 <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:textSize="14sp"
                     android:id="@+id/author"
-                    android:layout_marginStart="10dp"
-                    tools:text="theBestMeme"
-                    android:layout_height="wrap_content" />
-               <com.google.android.material.textview.MaterialTextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_gravity="end"
-                   tools:text="10, Jan 9:60:60"
-                   android:id="@+id/date"/>
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_author"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="theBestMeme" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="10, Jan 9:60:60" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textSize="20sp"
+                android:layout_marginTop="@dimen/card_margin_top"
+                android:textSize="@dimen/title_text_size"
                 android:id="@+id/post_title"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/title_margin_start"
                 tools:text="Title of this post"
                 android:layout_height="wrap_content" />
 
@@ -56,13 +61,13 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:scaleType="centerCrop"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/card_margin_top"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:layout_width="40dp"
                 android:id="@+id/favorite_btn"
-                tools:src="@drawable/ic_filled_heart"
+                android:src="@drawable/ic_filled_heart"
                 android:layout_height="40dp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
