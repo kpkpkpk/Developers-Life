@@ -1,18 +1,12 @@
 package com.example.devapp.domain.usecases
 
 import androidx.paging.PagingSource
-import com.example.devapp.domain.model.GifsResponse
-import com.example.devapp.domain.repository.GifRepository
-import com.example.devapp.data.utils.Resource
+import com.example.devapp.data.paging.GifPagingRepository
 import com.example.devapp.domain.model.GifModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 
-class GetListOfMemesUseCase @Inject constructor(
-    private val gifRepository: GifRepository
+class GetPagingSourceMemesUseCase @Inject constructor(
+    private val gifPagingRepository: GifPagingRepository
 ) {
 //    operator fun invoke(type:String,page:Int,pageSize:Int): Flow<Resource<GifsResponse>> = flow{
 //       try {
@@ -26,7 +20,7 @@ class GetListOfMemesUseCase @Inject constructor(
 //       }
 //       }
     operator fun invoke(type:String): PagingSource<Int,GifModel>{
-        return gifRepository.getMemes(type)
+        return gifPagingRepository.getMemes(type)
     }
 
 }

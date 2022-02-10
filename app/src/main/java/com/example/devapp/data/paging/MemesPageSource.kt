@@ -1,21 +1,19 @@
-package com.example.devapp.data.remote
+package com.example.devapp.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.devapp.data.local.Constants
 import com.example.devapp.data.utils.toGifModel
 import com.example.devapp.domain.model.GifModel
-import com.example.devapp.domain.model.GifsResponse
-import com.example.devapp.domain.usecases.GetListOfMemesUseCase
+import com.example.devapp.domain.usecases.GetGifsResponseUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import retrofit2.HttpException
 import java.io.IOException
-import javax.inject.Inject
 
 class MemesPageSource @AssistedInject constructor(
-    private val api: API,
+    private val getGifsResponseUseCase: GetGifsResponseUseCase,
     @Assisted("type") private val type: String,
 ) : PagingSource<Int, GifModel>() {
     override fun getRefreshKey(state: PagingState<Int, GifModel>): Int? {
@@ -34,22 +32,18 @@ class MemesPageSource @AssistedInject constructor(
         // Ограничиваем максимальное количество постов с апишки до 10
         val pageSize = params.loadSize.coerceAtMost(Constants.MAX_PAGE_SIZE)
         //Делаем запрос к серверу
-        try {
-            val response = api.getListOfMemes(type, pageNumber, pageSize)
-            return if (response.isSuccessful) {
-                val listOfGifModels = response.body()!!.result.map { it.toGifModel() }
-                val nextPageNumber = if (listOfGifModels.isEmpty()) null else pageNumber + 1
-                val prevPageNumber = if (pageNumber > 0) pageNumber - 1 else null
-                LoadResult.Page(listOfGifModels,
-                    prevKey = prevPageNumber,
-                    nextKey = nextPageNumber)
-            } else {
-                LoadResult.Error(HttpException(response))
-            }
+        return try {
+            val data = getGifsResponseUseCase(type, pageNumber, pageSize)
+            val listOfGifModels = data.result.map { it.toGifModel() }
+            val nextPageNumber = if (listOfGifModels.isEmpty()) null else pageNumber + 1
+            val prevPageNumber = if (pageNumber > 0) pageNumber - 1 else null
+            LoadResult.Page(listOfGifModels,
+                prevKey = prevPageNumber,
+                nextKey = nextPageNumber)
         } catch (e: HttpException) {
-            return LoadResult.Error(e)
+            LoadResult.Error(e)
         } catch (e: IOException) {
-            return LoadResult.Error(e)
+            LoadResult.Error(e)
         }
 
 

@@ -4,15 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.example.devapp.domain.model.GifModel
-import com.example.devapp.domain.usecases.GetListOfMemesUseCase
-import com.example.devapp.ui.components.fragments.home_fragment.HomeFragmentState
+import com.example.devapp.domain.usecases.GetPagingSourceMemesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getListOfMemesUseCase: GetListOfMemesUseCase,
+    private val getPagingSourceMemesUseCase: GetPagingSourceMemesUseCase,
 ) : ViewModel() {
     private val _type = MutableStateFlow("")
     private val _memes: StateFlow<PagingData<GifModel>> = _type
@@ -26,7 +25,7 @@ class HomeViewModel @Inject constructor(
     private var newPagingSource: PagingSource<*, *>? = null
     private fun newPager(type: String): Pager<Int, GifModel> {
         return Pager(PagingConfig(5, enablePlaceholders = false)) {
-            getListOfMemesUseCase(type).also { newPagingSource = it }
+            getPagingSourceMemesUseCase(type).also { newPagingSource = it }
         }
     }
 
