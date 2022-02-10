@@ -8,6 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="#2F000000"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -18,12 +19,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/memes_recycler_view"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/btn"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

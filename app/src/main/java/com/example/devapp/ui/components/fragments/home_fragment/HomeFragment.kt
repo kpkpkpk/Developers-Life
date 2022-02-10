@@ -20,14 +20,16 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    private val rvAdapter: GifAdapter = GifAdapter()
+
     private val homeViewModel: HomeViewModel by viewModels()
+    private val adapter by lazy {
+        GifAdapter()
+    }
+
     override fun FragmentHomeBinding.initialize() {
         binding.memesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        binding.btn.setOnClickListener {
-            homeViewModel.nextPage("latest")
-        }
+        binding.memesRecyclerView.adapter = adapter
+        homeViewModel.setType("latest")
 //        rvAdapter.submitList(
 //        )
 //        homeViewModel.state
@@ -36,23 +38,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 //
 //            }.launchIn(lifecycleScope)
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-//            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            homeViewModel.state.collectLatest {
-                when {
-                    it.error.isNotBlank() -> {
-                        Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
-                    }
-                    it.memesList.isNotEmpty() -> {
-                        rvAdapter.submitList(it.memesList)
-                        binding.memesRecyclerView.adapter = rvAdapter
-                    }
-                    else -> {
-                        //
-                    }
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                homeViewModel.memes.collectLatest {
+                    adapter.submitData(it)
                 }
+
             }
         }
-        homeViewModel.getListOfMemes("latest", homeViewModel.page, pageSize = 10)
+
+//                when {
+//                    it.error.isNotBlank() -> {
+//                        Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+//                    }
+//                    it.memesList.isNotEmpty() -> {
+//                        rvAdapter.submitList(it.memesList)
+//                        binding.memesRecyclerView.adapter = rvAdapter
+//                    }
+//                    else -> {
+//                        //
+//                    }
+//                }
+//            }
+//        }
+
     }
 }
+
 

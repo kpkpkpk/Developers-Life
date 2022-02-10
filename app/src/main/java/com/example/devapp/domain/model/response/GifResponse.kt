@@ -22,23 +22,5 @@ data class GifResponse(
     @SerializedName("fileSize") val fileSize: Int?,
     @SerializedName("canVote") val canVote: Boolean?,
 ) {
-    fun toGifModel(): GifModel = GifModel(
-        id = id!!,
-        description = description!!,
-        votes = votes!!,
-        author = author!!,
-        date = date!!,
-        gifURL = gifURL,
-        gifSize = gifSize!!,
-        previewURL = previewURL!!,
-        videoURL = videoURL,
-        videoPath = videoPath,
-        videoSize = videoSize,
-        type = type!!,
-        width = width!!,
-        height = height!!,
-        commentsCount = commentsCount!!,
-        fileSize = fileSize!!,
-        canVote = canVote!!
-    )
+
 }

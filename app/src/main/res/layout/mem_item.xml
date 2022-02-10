@@ -33,7 +33,7 @@
                     android:textSize="@dimen/text_size_author"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="theBestMeme" />
+                    tools:text="memodel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/date"
@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="10, Jan 9:60:60" />
+                    tools:text="60, Jan 60:60:60" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -67,6 +67,7 @@
             <androidx.appcompat.widget.AppCompatImageButton
                 android:layout_width="40dp"
                 android:id="@+id/favorite_btn"
+                android:backgroundTint="@android:color/transparent"
                 android:src="@drawable/ic_filled_heart"
                 android:layout_height="40dp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
