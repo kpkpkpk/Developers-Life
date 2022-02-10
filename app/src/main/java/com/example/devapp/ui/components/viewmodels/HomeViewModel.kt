@@ -2,10 +2,7 @@ package com.example.devapp.ui.components.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.PagingSource
+import androidx.paging.*
 import com.example.devapp.domain.model.GifModel
 import com.example.devapp.domain.usecases.GetListOfMemesUseCase
 import com.example.devapp.ui.components.fragments.home_fragment.HomeFragmentState
@@ -21,7 +18,7 @@ class HomeViewModel @Inject constructor(
     private val _memes: StateFlow<PagingData<GifModel>> = _type
         .map(::newPager)
         .flatMapLatest { pager ->
-            pager.flow
+            pager.flow.cachedIn(viewModelScope)
         }.stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
 
     val memes: StateFlow<PagingData<GifModel>>
